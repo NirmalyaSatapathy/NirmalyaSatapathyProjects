@@ -1,7 +1,0 @@
-INDEX VERSION 1.4+C:\javaProgramming\CarRental\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-1618753213.index
-499335761.index
-735975252.index
-1264877958.index
-2312016693.index
-953044184.index

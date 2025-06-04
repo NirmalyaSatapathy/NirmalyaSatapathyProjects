@@ -1,3 +1,0 @@
-127.0.0.1 - - [01/May/2025:21:36:16 +0530] "GET / HTTP/1.1" 404 751
-0:0:0:0:0:0:0:1 - - [01/May/2025:21:36:16 +0530] "GET /CarRental/WEB-INF/classes/com/java/Carrental/dao/CustomerImp.java HTTP/1.1" 404 682
-0:0:0:0:0:0:0:1 - - [01/May/2025:21:36:16 +0530] "GET /favicon.ico HTTP/1.1" 404 762

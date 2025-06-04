@@ -1,3 +1,0 @@
-INDEX VERSION 1.134
-C:\javaProgramming\Tour&Travel2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2145555633.index
-\ExpensesProject\src\main\java

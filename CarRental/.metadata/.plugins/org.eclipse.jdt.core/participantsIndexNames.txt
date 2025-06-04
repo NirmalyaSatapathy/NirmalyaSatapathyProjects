@@ -1,3 +1,0 @@
-INDEX VERSION 1.134
-C:\javaProgramming\CarRental\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\91730007.index
-\CarRental\src\main\java

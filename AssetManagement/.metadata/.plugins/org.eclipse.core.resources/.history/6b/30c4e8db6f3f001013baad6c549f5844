@@ -1,9 +1,0 @@
-package com.java.asset.dao;
-
-import com.java.asset.model.Asset;
-
-public interface AssetDao {
-public String addAsset(Asset asset);
-public String showAssets();
-public Asset searchAsset(int AssetID);
-}

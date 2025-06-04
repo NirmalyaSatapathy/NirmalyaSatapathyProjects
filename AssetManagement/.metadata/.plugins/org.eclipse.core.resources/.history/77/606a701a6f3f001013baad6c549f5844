@@ -1,9 +1,0 @@
-package com.java.asset.dao;
-
-import com.java.asset.model.IssueAsset;
-
-public interface IssueAssetDao {
-public String issueAssetDao(IssueAsset issueAsset);
-public String returnAsset(IssueAsset returnAsset);
-public List<IssueAsset> searchByUserId(int EmployeeID);
-}
