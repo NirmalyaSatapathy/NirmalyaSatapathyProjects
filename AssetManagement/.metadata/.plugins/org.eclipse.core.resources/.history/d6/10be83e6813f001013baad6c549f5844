@@ -1,0 +1,6 @@
+package com.java.asset.dao;
+
+public interface LoginDao {
+public String adminLogin(Login login);
+public String userLogin(Login login);
+}

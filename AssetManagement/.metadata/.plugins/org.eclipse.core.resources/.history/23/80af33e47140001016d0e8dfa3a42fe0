@@ -1,0 +1,7 @@
+package com.java.asset.dao;
+
+import com.java.asset.model.AssetManager;
+
+public interface AssetManagerDao {
+public String issueAsset(AssetManager assetManager);
+}

@@ -1,0 +1,16 @@
+package com.java.asset.controller;
+
+import com.java.asset.bal.LoginBal;
+import com.java.asset.model.Login;
+
+public class LoginController {
+LoginBal loginBal;
+public String adminLoginController(Login login)
+{
+	return loginBal.adminLogin(login);
+}
+public String userLoginController(Login login)
+{
+	return loginBal.userLogin(login);
+}
+}

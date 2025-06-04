@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.java.hp.model.Doctor" table="Doctor">
+    <id name="doctorId" column="doctorId">
+      <generator class="assigned"/>
+    </id>
+
+    <property name="doctorName" column="doctorName"/>
+    <property name="location" column="location"/>
+    <property name="mobileNo" column="mobileNo"/>
+
+    <property name="spetialization">
+      <column name="specialization"/>
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.java.hp.model.Spetialization</param>
+        <param name="type">12</param>
+      </type>
+    </property>
+
+    <property name="isStatus">
+      <column name="isStatus"/>
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.java.hp.model.Status</param>
+        <param name="type">12</param>
+      </type>
+    </property>
+
+    <!-- One-to-Many with Patient -->
+    <list name="patients" cascade="all" inverse="true">
+      <key column="doctorId"/>
+      <list-index column="list_index"/>
+      <one-to-many class="com.java.hp.model.Patient"/>
+    </list>
+  </class>
+  <query name="showAllDoctors">
+    <![CDATA[
+      from com.java.hp.model.Doctor
+    ]]>
+  </query>
+  <query name="findDoctorsBySpecialization">
+    <![CDATA[
+      from com.java.hp.model.Doctor d
+      where d.spetialization = ? 
+    ]]>
+</query>
+<query name="findDoctorById">
+      from com.java.hp.model.Doctor d where d.doctorId = ?  
+</query>
+</hibernate-mapping>

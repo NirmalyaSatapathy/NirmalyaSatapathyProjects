@@ -1,0 +1,21 @@
+package com.java.asset.dao;
+
+import com.java.asset.model.Login;
+
+public class LoginDaoImpl implements LoginDao{
+
+	@Override
+	public String adminLogin(Login login) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String userLogin(Login login) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
+}

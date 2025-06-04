@@ -1,0 +1,164 @@
+package com.java.Carrental.dao;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.java.Carrental.model.Lease;
+import com.java.Carrental.model.Payment;
+import com.java.Carrental.util.ConnectionHelper;
+
+public class LeaseImp implements Leasedao {
+	Connection con;
+	@Override
+	public String createLease(Lease lease) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		lease.setDuration(duration(lease.getStartDate(),lease.getEndDate()));
+		 String cmd1 = "INSERT INTO Lease (leaseId,customerId,carId, leaseType, duration, startDate,endDate, isReturned,cost) VALUES (?, ?, ?, ?, ?, ?,?,?,?)";
+	     String cmd2 = "UPDATE Car SET available = false WHERE carId = ?";
+	     con=ConnectionHelper.getConnection();
+	     PreparedStatement psmt1=con.prepareStatement(cmd1);
+	     PreparedStatement psmt2=con.prepareStatement(cmd2);
+	     psmt1.setInt(1, lease.getLeaseId());
+         psmt1.setInt(2, lease.getCustomerId());
+         psmt1.setInt(3, lease.getCarId());
+         psmt1.setString(4, lease.getType());
+         psmt1.setLong(5, lease.getDuration());
+         psmt1.setDate(6, Date.valueOf(lease.getStartDate()));
+         psmt1.setDate(7,Date.valueOf(lease.getEndDate() ));
+         psmt1.setBoolean(8, lease.isReturned());
+         psmt1.setDouble(9, lease.getCost());
+         psmt1.executeUpdate();
+         psmt2.setInt(1, lease.getCarId());
+         psmt2.executeUpdate();
+         return "lease created";
+	}
+
+	@Override
+	public String returnCar(int leaseId) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		 String cmd1 = "UPDATE lease SET isReturned = true, endDate = ? WHERE leaseId = ?";
+		 String cmd2 = "UPDATE car SET available = true WHERE carId = (SELECT carId FROM lease WHERE leaseId = ?)";
+	     con=ConnectionHelper.getConnection();
+	     PreparedStatement psmt1=con.prepareStatement(cmd1);
+	     PreparedStatement psmt2=con.prepareStatement(cmd2);
+	     psmt1.setDate(1, Date.valueOf(LocalDate.now()));
+         psmt1.setInt(2, leaseId);
+         psmt1.executeUpdate();
+         psmt2.setInt(1, leaseId);
+         psmt2.executeUpdate();
+         return "UPDATED";
+	}
+
+	@Override
+	public List<Lease> showActiveLease() throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		  String cmd = "SELECT * FROM lease WHERE isReturned = false";
+		  con=ConnectionHelper.getConnection();
+		  PreparedStatement psmt1=con.prepareStatement(cmd);
+		  ResultSet rs=psmt1.executeQuery();
+		  List<Lease> leases = new ArrayList<>();
+		  while(rs.next())
+		  {
+		  Lease lease = new Lease();
+          lease.setLeaseId(rs.getInt("leaseId"));
+          lease.setCustomerId(rs.getInt("customerId"));
+          lease.setCarId(rs.getInt("carId"));
+          lease.setType(rs.getString("leaseType"));
+          lease.setDuration(rs.getInt("duration"));//calculate duration automatic
+          lease.setStartDate(rs.getDate("startDate").toLocalDate());
+          lease.setEndDate(rs.getDate("endDate").toLocalDate());
+          lease.setReturned(rs.getBoolean("isReturned"));
+          lease.setCost(rs.getDouble("cost"));//calculate cost dynamically
+          leases.add(lease);
+		  }
+          return leases;
+	}
+
+	@Override
+	public List<Lease> showLeaseHistory() throws ClassNotFoundException, SQLException {
+		 String cmd = "SELECT * FROM lease";
+		 con=ConnectionHelper.getConnection();
+		 PreparedStatement psmt1=con.prepareStatement(cmd);
+		 ResultSet rs=psmt1.executeQuery();
+		 List<Lease> leases = new ArrayList<>();
+		 while(rs.next())
+		 {
+		 Lease lease = new Lease();
+         lease.setLeaseId(rs.getInt("leaseId"));
+         lease.setCustomerId(rs.getInt("customerId"));
+         lease.setCarId(rs.getInt("carId"));
+         lease.setType(rs.getString("leaseType"));
+         lease.setDuration(rs.getInt("duration"));//calculate duration automatic
+         lease.setStartDate(rs.getDate("startDate").toLocalDate());
+         lease.setEndDate(rs.getDate("endDate").toLocalDate());
+         lease.setReturned(rs.getBoolean("isReturned"));
+         lease.setCost(rs.getDouble("cost"));
+         leases.add(lease);
+		 }
+		return leases;
+	}
+
+	@Override
+	public Lease getLeasebyId(int leaseId) throws ClassNotFoundException, SQLException {
+		String cmd="select * from Lease where leaseId=?";
+		con=ConnectionHelper.getConnection();
+		PreparedStatement pst=con.prepareStatement(cmd);
+		pst.setInt(1, leaseId);
+		Lease lease=new Lease();
+		ResultSet rs=pst.executeQuery();
+		if(rs.next())
+		{
+			 lease.setLeaseId(rs.getInt("leaseId"));
+	         lease.setCustomerId(rs.getInt("customerId"));
+	         lease.setCarId(rs.getInt("carId"));
+	         lease.setType(rs.getString("leaseType"));
+	         lease.setDuration(rs.getInt("duration"));
+	         lease.setStartDate(rs.getDate("startDate").toLocalDate());
+	         lease.setEndDate(rs.getDate("endDate").toLocalDate());
+	         lease.setReturned(rs.getBoolean("isReturned"));
+		}
+		return lease;
+	}
+	
+
+	public long duration(LocalDate d1, LocalDate d2) {    
+	        long duration = ChronoUnit.DAYS.between(d1, d2);
+	        System.out.println("Total days between: " + duration);
+			return duration;
+	}
+
+	@Override
+	public List<Lease> getLeasebyCustomer(int CustomerId) throws ClassNotFoundException, SQLException {
+		String cmd="select * from Lease where customerId=?";
+		List<Lease> lease=new ArrayList<Lease>();
+		
+		con=ConnectionHelper.getConnection();
+		PreparedStatement psmt=con.prepareStatement(cmd);
+		psmt.setInt(1, CustomerId);
+		ResultSet rs=psmt.executeQuery();
+		while(rs.next())
+		{
+			Lease l=new Lease();
+			l.setLeaseId(rs.getInt("leaseId"));
+			l.setCarId(rs.getInt("carId"));
+			l.setCost(rs.getDouble("cost"));
+			l.setCustomerId(rs.getInt("customerId"));
+			l.setDuration(rs.getLong("duration"));
+			l.setEndDate(rs.getDate("endDate").toLocalDate());
+			l.setStartDate(rs.getDate("startDate").toLocalDate());
+			l.setReturned(rs.getBoolean("isReturned"));
+			l.setType(rs.getString("leaseType"));
+			lease.add(l);
+		}
+		return lease;
+	}
+
+
+}

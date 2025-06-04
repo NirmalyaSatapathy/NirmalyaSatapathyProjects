@@ -1,0 +1,29 @@
+package com.java.Carrental.bal;
+
+import com.java.Carrental.Exception.Uexception;
+import com.java.Carrental.model.Car;
+
+public class carImpBal {
+	public String addCar(Car car)
+	{
+		 StringBuilder errors = new StringBuilder();
+	        if (car.getId() <= 0) {
+	            errors.append("Car ID must be a positive number.\n");
+	        }
+	        if (car.getBrand() == null || car.getBrand().trim().isEmpty()) {
+	            errors.append("Brand cannot be empty.\n");
+	        }
+	        if (car.getModel() == null || car.getModel().trim().isEmpty()) {
+	            errors.append("Model cannot be empty.\n");
+	        }
+	        if (car.getPerDay() <= 0) {
+	            errors.append("Per day rent must be a positive number.\n");
+	        }
+	        if (car.getPerMonth() <= 0) {
+	           errors.append("Per month rent must be a positive number.\n");
+	        }
+	        if (errors.length() > 0) {
+	            throw new Uexception(errors.toString());
+	        }
+	}
+}

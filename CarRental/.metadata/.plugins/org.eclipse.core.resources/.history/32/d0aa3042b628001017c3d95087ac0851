@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Add New Car</h2>
+	<center>
+    <form action="AddCarServlet" method="post">
+        Car ID: <input type="number" name="carId" required><br>
+        Model: <input type="text" name="model" required><br>
+        Brand: <input type="text" name="brand" required><br>
+        Price per Day: <input type="number" name="price" required><br>
+        Availability (yes/no): <input type="text" name="availability" required><br>
+        <input type="submit" value="Add Car">
+    </form>
+    </center>>
+</body>
+</html>

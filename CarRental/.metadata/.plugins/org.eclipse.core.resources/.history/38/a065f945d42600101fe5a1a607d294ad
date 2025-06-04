@@ -1,0 +1,13 @@
+package com.java.Carrental.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.java.Carrental.model.Lease;
+
+public interface Leasedao {
+	public void createLease(Lease lease) throws ClassNotFoundException, SQLException;
+	public void returnCar(int leaseId) throws ClassNotFoundException, SQLException;
+	List<Lease> showActiveLease() throws ClassNotFoundException, SQLException;
+	List<Lease> showLeaseHistory();
+}

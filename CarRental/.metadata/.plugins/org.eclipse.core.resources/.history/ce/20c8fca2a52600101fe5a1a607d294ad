@@ -1,0 +1,51 @@
+package com.java.Carrental.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.java.Carrental.model.Customer;
+
+public class CustomerImp implements CustomerDao{
+
+	static
+	{
+		List<Customer> customers=new ArrayList<Customer>();
+	}
+	@Override
+	public void addCustomer(Customer customer) {
+		Customer cus=new Customer();
+		cus.setEmail(customer.getEmail());
+		cus.setId(customer.getId());
+		cus.setName(customer.getName());
+		cus.setPhone(customer.getPhone());
+	}
+
+	@Override
+	public void updateCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		Customer cus=new Customer();
+		cus=getCustomerById(customer.getId());
+		cus.setEmail(customer.getEmail());
+		cus.setId(customer.getId());
+		cus.setName(customer.getName());
+		cus.setPhone(customer.getPhone());
+	}
+
+	@Override
+	public Customer getCustomerById(int id) {
+		// TODO Auto-generated method stub
+		Customer cus=new new Customer();
+		for(Customer c:Customers )
+		{
+			
+		}
+		return cus;
+	}
+
+	@Override
+	public List<Customer> getCustomer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

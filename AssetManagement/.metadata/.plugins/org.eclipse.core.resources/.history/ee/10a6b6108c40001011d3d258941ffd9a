@@ -1,0 +1,84 @@
+package com.java.asset.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.java.asset.model.AssetManager;
+import com.java.asset.model.Employ;
+import com.java.asset.util.ConnectionHelper;
+
+public class AssetManagerDaoImpl implements AssetManagerDao {
+	@Override
+	public String issueAsset(AssetManager assetManager) throws ClassNotFoundException, SQLException {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	        con = ConnectionHelper.getConnection();
+
+	        // 1. Get AssetID from AssetName
+	        String getAssetIdSQL = "SELECT AssetID FROM Asset WHERE AssetName = ?";
+	        pstmt = con.prepareStatement(getAssetIdSQL);
+	        pstmt.setString(1, assetManager.getAssetName());
+	        rs = pstmt.executeQuery();
+	        int assetId = 0;
+	        if (rs.next()) {
+	            assetId = rs.getInt("AssetID");
+	        } else {
+	            return "AssetNotFound";
+	        }
+	        rs.close();
+	        pstmt.close();
+
+	        // 2. Get EmployeeID from Username
+	        String getEmployeeIdSQL = "SELECT EmployeeID FROM Employee WHERE Username = ?";
+	        pstmt = con.prepareStatement(getEmployeeIdSQL);
+	        pstmt.setString(1, assetManager.getEmployName());
+	        rs = pstmt.executeQuery();
+	        int employeeId = 0;
+	        if (rs.next()) {
+	            employeeId = rs.getInt("EmployeeID");
+	        } else {
+	            return "EmployeeNotFound";
+	        }
+	        rs.close();
+	        pstmt.close();
+
+	        // 3. Insert into AssetAssignment
+	        String insertSQL = "INSERT INTO AssetAssignment (AssetID, EmployeeID, AssignedDate) VALUES (?, ?, ?)";
+	        pstmt = con.prepareStatement(insertSQL);
+	        pstmt.setInt(1, assetId);
+	        pstmt.setInt(2, employeeId);
+	        pstmt.setDate(3, new java.sql.Date(assetManager.getAssignedDate().getTime()));
+	        int rowsInserted = pstmt.executeUpdate();
+	        pstmt.close();
+
+	        if (rowsInserted > 0) {
+	            // 4. Decrease AvailableQuantity in Asset table
+	            String updateAssetSQL = "UPDATE Asset SET AvailableQuantity = AvailableQuantity - 1 WHERE AssetID = ? AND AvailableQuantity > 0";
+	            pstmt = con.prepareStatement(updateAssetSQL);
+	            pstmt.setInt(1, assetId);
+	            int rowsUpdated = pstmt.executeUpdate();
+	            pstmt.close();
+
+	            if (rowsUpdated > 0) {
+	                return "EmployDashBoard?faces-redirect=true";
+	            } else {
+	                return "NoAvailableAssets";
+	            }
+	        } else {
+	            return "IssueFailed";
+	        }
+
+	    
+	}
+
+	@Override
+	public String returnAsset(Employ employ) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+}

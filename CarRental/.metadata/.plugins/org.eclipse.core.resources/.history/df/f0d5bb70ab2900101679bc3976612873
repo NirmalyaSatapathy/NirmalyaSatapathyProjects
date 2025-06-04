@@ -1,0 +1,105 @@
+package com.java.Carrental.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.time.LocalDate;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.java.Carrental.Exception.CarNotFoundException;
+import com.java.Carrental.Exception.LeaseNotFoundException;
+import com.java.Carrental.Exception.Uexception;
+import com.java.Carrental.bal.Leaseimpbal;
+import com.java.Carrental.bal.Paymentsbal;
+import com.java.Carrental.model.Lease;
+import com.java.Carrental.model.Payment;
+
+/**
+ * Servlet implementation class MakePayment
+ */
+
+public class MakePayment extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public MakePayment() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    response.setContentType("text/html");
+	    PrintWriter out = response.getWriter();
+
+	    // Get the leaseId and amount from the form
+	    int leaseId = Integer.parseInt(request.getParameter("leaseId"));
+	    double amount = Double.parseDouble(request.getParameter("amount"));
+	    LocalDate date = LocalDate.now();
+
+	    // Create the payment object
+	    Payment payment = new Payment();
+	    payment.setLeaseId(leaseId);
+	    payment.setAmount(amount);
+	    payment.setDate(date);
+
+	    // Get lease details (like the total cost and remaining amount)
+	    Lease lease;
+		try {
+			lease = new Leaseimpbal().getLeasebyIdbal(leaseId);
+			double remainingAmount = lease.getCost() - lease.getAdvance();
+
+		    // Check if the payment amount is correct (shouldn't be more than the remaining amount)
+		    if (amount > remainingAmount) {
+		        out.println("<html><body><h3>Payment exceeds the remaining balance. Please enter a valid amount.</h3></body></html>");
+		        return;
+		    }
+
+		    // Make the payment
+		    Paymentsbal paymentsbal = new Paymentsbal();
+		    try {
+		        String result;
+				try {
+					result = paymentsbal.makePaymentbal(payment);
+					 out.println("<html><body>");
+				        out.println("<h3>Payment Successful!</h3>");
+				        out.println("<p>Lease ID: " + leaseId + "</p>");
+				        out.println("<p>Amount Paid: " + amount + "</p>");
+				        out.println("<p>Remaining Balance: " + (remainingAmount - amount) + "</p>");
+				        out.println(result); // This will print the payment ID
+				        out.println("</body></html>");
+				} catch (CarNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		       
+		    } catch (ClassNotFoundException | SQLException | LeaseNotFoundException | Uexception e) {
+		        out.println("<html><body><h3>Error: " + e.getMessage() + "</h3></body></html>");
+		    }
+		} catch (ClassNotFoundException | SQLException | LeaseNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} // You need to implement this function
+	    
+	}
+
+	    }
+	
+
+

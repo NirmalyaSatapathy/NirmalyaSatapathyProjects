@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body style="color:red;">
+ <h2>Admin Dashboard</h2>
+    <ul>
+        <li><a href="addCar.html">Add Car</a></li><br>
+        <li><a href="removeCar.html">Remove Car</a></li><br>
+        <li><a href="viewCar.html">View Available Cars</a></li><br>
+        <li><a href="rented.html">View rented Cars</a></li><br>
+        <li><a href="getAllCustomers.html">Get All Customers</a></li><br>
+        <li><a href="getCustomerById.html">Get Customer by ID</a></li><br>
+        <li><a href="updateCustomer.html">Update Customer</a></li><br>
+        <li><a href="getAllPayments.html">Get All Payments</a></li><br>
+        <li><a href="getPaymentsById.html">Get Payment by ID</a></li><br>
+        <li><a href="getPaymentbyLease.html">Get Payment by Lease ID</a></li><br>
+        <li><a href="allLeases.html">View All Leases</a></li><br>
+        <li><a href="activeLeases.html">View Active Leases</a></li><br>
+        <li><a href="getLease.html">Get Lease by ID</a></li><br>
+        <li><a href="getLeaseCustomer.html">Get Leases by Customer ID</a></li><br>
+    </ul>
+</body>
+</html>

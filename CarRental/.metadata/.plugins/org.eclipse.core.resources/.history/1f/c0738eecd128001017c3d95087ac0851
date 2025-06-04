@@ -1,0 +1,60 @@
+package com.java.Carrental.servlet;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.java.Carrental.dao.CarImp;
+
+/**
+ * Servlet implementation class ViewAllCars
+ */
+
+public class ViewAvailableCars extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ViewAvailableCars() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CarImp car=new CarImp();
+	        List<Car> cars = car.();
+
+	        PrintWriter out = response.getWriter();
+	        out.println("<html><body><h2>Car List</h2>");
+
+	        if (cars.isEmpty()) {
+	            out.println("<p>No cars available.</p>");
+	        } else {
+	            out.println("<table border='1'><tr><th>ID</th><th>Model</th><th>Brand</th><th>Price</th><th>Availability</th></tr>");
+	            for (Car car : cars) {
+	                out.println("<tr><td>" + car.getCarId() + "</td><td>" + car.getModel() + "</td><td>" + car.getBrand()
+	                        + "</td><td>" + car.getPricePerDay() + "</td><td>" + car.getIsAvailable() + "</td></tr>");
+	            }
+	            out.println("</table>");
+	        }
+
+	        out.println("</body></html>");
+	}
+
+}

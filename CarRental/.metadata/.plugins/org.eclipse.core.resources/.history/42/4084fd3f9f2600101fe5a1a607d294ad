@@ -1,0 +1,5 @@
+package com.java.Carrental.model;
+
+public class Customer {
+
+}

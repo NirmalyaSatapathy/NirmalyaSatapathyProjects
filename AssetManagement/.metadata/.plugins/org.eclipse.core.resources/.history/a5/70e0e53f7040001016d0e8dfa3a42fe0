@@ -1,0 +1,49 @@
+package com.java.asset.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import org.apache.log4j.Logger;
+
+import com.java.asset.model.Asset;
+import com.java.asset.util.ConnectionHelper;
+
+public class AssetDaoImpl implements AssetDao{
+
+	Connection con;
+	PreparedStatement pst;
+	private static final Logger log = Logger.getLogger("com.java.asset.dao.AssetDaoImpl");
+	@Override
+	public String addAsset(Asset asset) throws ClassNotFoundException, SQLException {
+	    Connection con = ConnectionHelper.getConnection();
+	    String cmd = "INSERT INTO Asset (AssetName, Description, TotalQuantity, AvailableQuantity,createdBy,AssetType) VALUES (?, ?, ?, ?,?,?)";
+	    PreparedStatement pstmt = con.prepareStatement(cmd);
+	      	pstmt.setString(1, asset.getAssetName());
+	        pstmt.setString(2, asset.getDescription());
+	        pstmt.setInt(3, asset.getTotalQuantity());
+	        pstmt.setInt(4, asset.getAvailQuantity());
+	        pstmt.setString(5,asset.getCreatedBy());
+	        pstmt.setString(6,asset.getAssetType());
+	        int rowsInserted = pstmt.executeUpdate();
+	        con.close();
+	        if (rowsInserted > 0) {
+	        	log.info("Asset added successfully.");
+	            return "EmployDashBoard?faces-redirect=true";
+	        } else {
+	            return "Failed to add asset.";
+	        }
+	    }
+	@Override
+	public String showAssets() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Asset searchAsset(int AssetID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

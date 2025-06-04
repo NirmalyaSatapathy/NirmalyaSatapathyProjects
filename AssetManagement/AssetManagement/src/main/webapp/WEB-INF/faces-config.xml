@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee /WEB-INF/schema/web-facesconfig_2_0.xsd" 
+              version="2.0" metadata-complete="false">
+    <!-- This file must be present with our jar, even if it is empty.  Otherwise, our Java annotations won't get scanned! -->
+<managed-bean>
+	<managed-bean-name>returnAsset</managed-bean-name>
+    <managed-bean-class>com.java.asset.model.ReturnAsset</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+<managed-bean>
+	<managed-bean-name>employ</managed-bean-name>
+    <managed-bean-class>com.java.asset.model.Employ</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+<managed-bean>
+	<managed-bean-name>employDao</managed-bean-name>
+    <managed-bean-class>com.java.asset.dao.EmployDaoImpl</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+<managed-bean-name>employBal</managed-bean-name>
+    <managed-bean-class>com.java.asset.bal.EmployBal</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+            <property-name>employDao</property-name>
+            <property-class>com.java.asset.dao.EmployDaoImpl</property-class>
+            <value>#{employDao}</value>
+    </managed-property>
+     </managed-bean>
+      <managed-bean>
+<managed-bean-name>employController</managed-bean-name>
+    <managed-bean-class>com.java.asset.controller.EmployController</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+            <property-name>employBal</property-name>
+            <property-class>com.java.asset.bal.EmployBal</property-class>
+            <value>#{employBal}</value>
+    </managed-property>
+    </managed-bean>
+     <managed-bean>
+    <managed-bean-name>login</managed-bean-name>
+    <managed-bean-class>com.java.asset.model.Login</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+	<managed-bean-name>loginDao</managed-bean-name>
+    <managed-bean-class>com.java.asset.dao.LoginDaoImpl</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+     <managed-bean>
+<managed-bean-name>loginBal</managed-bean-name>
+    <managed-bean-class>com.java.asset.bal.LoginBal</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+            <property-name>loginDao</property-name>
+            <property-class>com.java.asset.dao.LoginDaoImpl</property-class>
+            <value>#{loginDao}</value>
+    </managed-property>
+     </managed-bean>
+    <managed-bean>
+<managed-bean-name>loginController</managed-bean-name>
+    <managed-bean-class>com.java.asset.controller.LoginController</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+            <property-name>loginBal</property-name>
+            <property-class>com.java.asset.bal.LoginBal</property-class>
+            <value>#{loginBal}</value>
+    </managed-property>
+    </managed-bean>
+     <managed-bean>
+    <managed-bean-name>asset</managed-bean-name>
+    <managed-bean-class>com.java.asset.model.Asset</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+	<managed-bean-name>assetDao</managed-bean-name>
+    <managed-bean-class>com.java.asset.dao.AssetDaoImpl</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+     <managed-bean>
+<managed-bean-name>assetBal</managed-bean-name>
+    <managed-bean-class>com.java.asset.bal.AssetBal</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+            <property-name>assetDao</property-name>
+            <property-class>com.java.asset.dao.AssetDaoImpl</property-class>
+            <value>#{assetDao}</value>
+    </managed-property>
+     </managed-bean>
+    <managed-bean>
+<managed-bean-name>assetController</managed-bean-name>
+    <managed-bean-class>com.java.asset.controller.AssetController</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+            <property-name>assetBal</property-name>
+            <property-class>com.java.asset.bal.AssetBal</property-class>
+            <value>#{assetBal}</value>
+    </managed-property>
+     </managed-bean>
+     <managed-bean>
+    <managed-bean-name>assetManager</managed-bean-name>
+    <managed-bean-class>com.java.asset.model.AssetManager</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+	<managed-bean-name>assetManagerDao</managed-bean-name>
+    <managed-bean-class>com.java.asset.dao.AssetManagerDaoImpl</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+     <managed-bean>
+<managed-bean-name>assetManagerBal</managed-bean-name>
+    <managed-bean-class>com.java.asset.bal.AssetManagerBal</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+            <property-name>assetManagerDao</property-name>
+            <property-class>com.java.asset.dao.AssetManagerDaoImpl</property-class>
+            <value>#{assetManagerDao}</value>
+    </managed-property>
+     </managed-bean>
+    <managed-bean>
+<managed-bean-name>assetManagerController</managed-bean-name>
+    <managed-bean-class>com.java.asset.controller.AssetManagerController</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+            <property-name>assetManagerBal</property-name>
+            <property-class>com.java.asset.bal.AssetManagerBal</property-class>
+            <value>#{assetManagerBal}</value>
+    </managed-property>
+    </managed-bean>
+</faces-config>

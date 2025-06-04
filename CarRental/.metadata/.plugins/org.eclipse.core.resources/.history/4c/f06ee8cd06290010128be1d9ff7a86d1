@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Find Payment by ID</h2>
+    <form action="GetPaymentById" method="post">
+        <label>Lease ID:</label><br>
+        <input type="number" name="paymentId" required><br>
+        <button type="submit">Search</button>
+    </form>
+</body>
+</html>

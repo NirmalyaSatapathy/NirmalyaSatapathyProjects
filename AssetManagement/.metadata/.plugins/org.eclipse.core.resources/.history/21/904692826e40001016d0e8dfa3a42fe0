@@ -1,0 +1,15 @@
+package com.java.asset.controller;
+
+import java.sql.SQLException;
+
+import com.java.asset.bal.AssetBal;
+import com.java.asset.model.Asset;
+
+public class AssetController {
+private AssetBal assetBal;
+public String addAssetController(Asset asset) throws ClassNotFoundException, SQLException
+{
+	return assetBal.addAssetBal(asset);
+	
+}
+}

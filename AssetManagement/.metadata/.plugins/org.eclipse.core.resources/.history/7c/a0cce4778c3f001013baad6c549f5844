@@ -1,0 +1,30 @@
+<%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
+<%@ taglib uri="http://java.sun.com/jsf/core" prefix="f" %>
+<f:view>
+<html>
+<head>
+    <title>Admin Login</title>
+</head>
+<body>
+        <h:form>
+            <h3>Admin Login</h3>
+            <table>
+                <tr>
+                    <td><h:outputLabel for="username" value="Username:" /></td>
+                    <td><h:inputText id="username" value="#{loginController.username}" required="true" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputLabel for="password" value="Password:" /></td>
+                    <td><h:inputSecret id="password" value="#{loginController.password}" required="true" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center;">
+                        <h:commandButton value="Login" action="#{loginController.login}" />
+                    </td>
+                </tr>
+            </table>
+            <h:messages style="color: red;" />
+        </h:form>
+</body>
+</html>
+</f:view>

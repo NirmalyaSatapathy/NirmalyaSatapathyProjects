@@ -1,0 +1,26 @@
+package com.java.asset.bal;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.java.asset.dao.AssetDao;
+import com.java.asset.model.Asset;
+
+public class AssetBal {
+private AssetDao assetDao;
+public AssetDao getAssetDao() {
+	return assetDao;
+}
+public void setAssetDao(AssetDao assetDao) {
+	this.assetDao = assetDao;
+}
+public String addAssetBal(Asset asset) throws ClassNotFoundException, SQLException
+{
+	return assetDao.addAsset(asset);
+}
+public List<Asset> showAssetsBal() throws ClassNotFoundException, SQLException
+{
+	return  assetDao.showAssets();
+	
+}
+}

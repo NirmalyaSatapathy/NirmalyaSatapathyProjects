@@ -1,0 +1,13 @@
+package com.java.Carrental.dao;
+
+import java.util.List;
+
+import com.java.Carrental.model.Car;
+
+public interface Cardao {
+	public void addCar(Car car);
+	public void remove(int carId);
+	public List<Car> showAvailableCars();
+	public List<Car> showRentedCars();
+	public Car findCarById(int carId);
+}

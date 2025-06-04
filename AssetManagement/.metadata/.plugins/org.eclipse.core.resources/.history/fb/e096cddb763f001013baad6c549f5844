@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee /WEB-INF/schema/web-facesconfig_2_0.xsd" 
+              version="2.0" metadata-complete="false">
+    <!-- This file must be present with our jar, even if it is empty.  Otherwise, our Java annotations won't get scanned! -->
+<managed-bean>
+	<managed-bean-name>userEjbImpl</managed-bean-name>
+    <managed-bean-class>com.travel.userEjb.UserEjbImpl</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+<managed-bean>
+	<managed-bean-name>ejbUser</managed-bean-name>
+    <managed-bean-class>com.travel.ejbModel.User</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+<managed-bean>
+	<managed-bean-name>userDao</managed-bean-name>
+    <managed-bean-class>com.travel.dao.UsersDaoImpl</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+<managed-bean>
+	<managed-bean-name>user</managed-bean-name>
+    <managed-bean-class>com.travel.model.User</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+<managed-bean>
+<managed-bean-name>userController</managed-bean-name>
+    <managed-bean-class>com.travel.controller.UserController</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+            <property-name>userEjbImpl</property-name>
+            <property-class>com.travel.userEjb.UserEjbImpl</property-class>
+            <value>#{userEjbImpl}</value>
+    </managed-property>
+    <managed-property>
+            <property-name>ejbUser</property-name>
+            <property-class>com.travel.ejbModel.User</property-class>
+            <value>#{ejbUser}</value>
+    </managed-property>
+    <managed-property>
+            <property-name>userDao</property-name>
+            <property-class>com.travel.dao.UsersDaoImpl</property-class>
+            <value>#{userDao}</value>
+    </managed-property>
+    <managed-property>
+            <property-name>user</property-name>
+            <property-class>com.travel.model.User</property-class>
+            <value>#{user}</value>
+    </managed-property>
+</managed-bean>
+<managed-bean>
+	<managed-bean-name>group</managed-bean-name>
+    <managed-bean-class>com.travel.model.Group</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+<managed-bean>
+	<managed-bean-name>ejbGroup</managed-bean-name>
+    <managed-bean-class>com.travel.ejbModel.Group</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+<managed-bean>
+	<managed-bean-name>groupEjbImpl</managed-bean-name>
+    <managed-bean-class>com.travel.groupEjb.GroupEjbImpl</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+<managed-bean>
+	<managed-bean-name>groupDao</managed-bean-name>
+    <managed-bean-class>com.travel.dao.GroupDaoImpl</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+<managed-bean>
+<managed-bean-name>groupController</managed-bean-name>
+    <managed-bean-class>com.travel.controller.GroupController</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+            <property-name>groupEjbImpl</property-name>
+            <property-class>com.travel.groupEjb.GroupEjbImpl</property-class>
+            <value>#{groupEjbImpl}</value>
+    </managed-property>
+    <managed-property>
+            <property-name>ejbGroup</property-name>
+            <property-class>com.travel.ejbModel.Group</property-class>
+            <value>#{ejbGroup}</value>
+    </managed-property>
+    <managed-property>
+            <property-name>groupDao</property-name>
+            <property-class>com.travel.dao.GroupDaoImpl</property-class>
+            <value>#{groupDao}</value>
+    </managed-property>
+     <managed-property>
+            <property-name>group</property-name>
+            <property-class>com.travel.model.Group</property-class>
+            <value>#{group}</value>
+    </managed-property>
+    </managed-bean>
+    <managed-bean>
+	<managed-bean-name>membersEjbImpl</managed-bean-name>
+    <managed-bean-class>com.travel.membersEjb.MembersEjbImpl</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+<managed-bean>
+	<managed-bean-name>ejbGroupMember</managed-bean-name>
+    <managed-bean-class>com.travel.ejbModel.GroupMember</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+    <property-name>group</property-name>
+    <property-class>com.travel.ejbModel.Group</property-class>
+    <value>#{ejbGroup}</value>
+    </managed-property>
+    <managed-property>
+    <property-name>user</property-name>
+    <property-class>com.travel.ejbModel.User</property-class>
+    <value>#{ejbUser}</value>
+</managed-property>
+</managed-bean>
+<managed-bean>
+<managed-bean-name>groupMemberController</managed-bean-name>
+    <managed-bean-class>com.travel.controller.MembersController</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+            <property-name>membersEjbImpl</property-name>
+            <property-class>com.travel.membersEjb.MembersEjbImpl</property-class>
+            <value>#{membersEjbImpl}</value>
+    </managed-property>
+    <managed-property>
+            <property-name>ejbGroupMember</property-name>
+            <property-class>com.travel.ejbModel.GroupMember</property-class>
+            <value>#{ejbGroupMember}</value>
+    </managed-property>
+    </managed-bean>
+    <managed-bean>
+	<managed-bean-name>expenseEjbImpl</managed-bean-name>
+    <managed-bean-class>com.travel.expenseEjb.ExpenseEjbImpl</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+    <managed-bean-name>ejbExpense</managed-bean-name>
+    <managed-bean-class>com.travel.ejbModel.Expenses</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+     <managed-property>
+    <property-name>group</property-name>
+    <property-class>com.travel.ejbModel.Group</property-class>
+    <value>#{ejbGroup}</value>
+    </managed-property>
+    <managed-property>
+    <property-name>user</property-name>
+    <property-class>com.travel.ejbModel.User</property-class>
+    <value>#{ejbUser}</value>
+</managed-property>
+</managed-bean>
+<managed-bean>
+<managed-bean-name>expenseController</managed-bean-name>
+    <managed-bean-class>com.travel.controller.ExpenseController</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+            <property-name>expenseEjbImpl</property-name>
+            <property-class>com.travel.expenseEjb.ExpenseEjbImpl</property-class>
+            <value>#{expenseEjbImpl}</value>
+    </managed-property>
+    <managed-property>
+            <property-name>ejbExpense</property-name>
+            <property-class>com.travel.ejbModel.Expenses</property-class>
+            <value>#{ejbExpense}</value>
+    </managed-property>
+    </managed-bean>
+    <managed-bean>
+	<managed-bean-name>splitEjbImpl</managed-bean-name>
+    <managed-bean-class>com.travel.splitEjb.SplitEjbImpl</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+<managed-bean-name>splitController</managed-bean-name>
+    <managed-bean-class>com.travel.controller.SplitExpenseController</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+            <property-name>splitEjbImpl</property-name>
+            <property-class>com.travel.splitEjb.SplitEjbImpl</property-class>
+            <value>#{splitEjbImpl}</value>
+    </managed-property>
+    <managed-property>
+            <property-name>ejbExpense</property-name>
+            <property-class>com.travel.ejbModel.Expenses</property-class>
+            <value>#{ejbExpense}</value>
+    </managed-property>
+    </managed-bean>
+</faces-config>

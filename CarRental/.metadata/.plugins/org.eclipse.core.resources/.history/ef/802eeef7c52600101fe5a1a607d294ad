@@ -1,0 +1,14 @@
+package com.java.Carrental.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.java.Carrental.model.Car;
+
+public interface Cardao {
+	public void addCar(Car car) throws ClassNotFoundException, SQLException;
+	public void remove(int carId) throws ClassNotFoundException, SQLException;
+	public List<Car> showAvailableCars() throws ClassNotFoundException, SQLException;
+	public List<Car> showRentedCars() throws SQLException;
+	public Car findCarById(int carId);
+}

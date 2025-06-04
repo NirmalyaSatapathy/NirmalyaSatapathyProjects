@@ -1,0 +1,8 @@
+package com.java.Carrental.dao;
+
+public interface CustomerDao {
+	public String addCustomer(Customer customer);
+	public String updateCustomer(Customer customer);
+	public Customer getCustomerById(int id);
+	public List<Customer> getCustomer(); 
+}

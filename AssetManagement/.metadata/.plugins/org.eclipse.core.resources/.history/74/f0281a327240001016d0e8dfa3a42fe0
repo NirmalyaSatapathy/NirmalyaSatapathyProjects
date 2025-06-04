@@ -1,0 +1,20 @@
+package com.java.asset.bal;
+
+import com.java.asset.dao.AssetManagerDao;
+import com.java.asset.model.AssetManager;
+
+public class AssetManagerBal {
+AssetManagerDao assetManagerDao;
+
+public AssetManagerDao getAssetManagerDao() {
+	return assetManagerDao;
+}
+
+public void setAssetManagerDao(AssetManagerDao assetManagerDao) {
+	this.assetManagerDao = assetManagerDao;
+}
+public String issueAssetBal(AssetManager assetManager)
+{
+	return assetManagerDao.issueAsset(assetManager);
+}
+}

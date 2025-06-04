@@ -1,0 +1,124 @@
+package com.java.Carrental.main;
+
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Scanner;
+
+import com.java.Carrental.dao.CarImp;
+import com.java.Carrental.dao.Cardao;
+import com.java.Carrental.dao.LeaseImp;
+import com.java.Carrental.dao.Leasedao;
+import com.java.Carrental.dao.Paymentdao;
+import com.java.Carrental.dao.PaymentsaoImp;
+import com.java.Carrental.model.Car;
+
+public class Main {
+    public static void main(String[] args) {
+        Cardao carDao = new CarImp();
+        Leasedao leaseDao = new LeaseImp();
+        Paymentdao paymentDao = new PaymentsaoImp();
+
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\n====== Car Rental Management System ======");
+            System.out.println("1. Add New Car");
+            System.out.println("2. View Available Cars");
+            System.out.println("3. Rent a Car (Lease)");
+            System.out.println("4. View All Leases");
+            System.out.println("5. Make Payment");
+            System.out.println("6. View All Payments");
+            System.out.println("0. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    scanner.nextLine(); // consume leftover newline
+                    Car newCar = new Car();
+                    System.out.print("Enter brand: ");
+                    newCar.setBrand(scanner.nextLine());
+                    System.out.print("Enter model: ");
+                    newCar.setModel(scanner.nextLine());
+                   System.out.println("Enter car id");
+                   newCar.setId(scanner.nextInt());
+                   newCar.setAvailability(true);
+                    carDao.addCar(newCar);
+                    break;
+
+                case 2:
+                    List<Car> availableCars = carDao.getAvailableCars();
+                    System.out.println("\nAvailable Cars:");
+                    for (Car car : availableCars) {
+                        System.out.println(car);
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter Car ID to lease: ");
+                    int carId = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
+                    System.out.print("Enter customer name: ");
+                    String customerName = scanner.nextLine();
+                    System.out.print("Enter lease start date (YYYY-MM-DD): ");
+                    LocalDate startDate = LocalDate.parse(scanner.nextLine());
+                    System.out.print("Enter lease end date (YYYY-MM-DD): ");
+                    LocalDate endDate = LocalDate.parse(scanner.nextLine());
+
+                    Lease lease = new Lease();
+                    lease.setCarId(carId);
+                    lease.setCustomerName(customerName);
+                    lease.setLeaseStartDate(startDate);
+                    lease.setLeaseEndDate(endDate);
+                    leaseDao.leaseCar(lease);
+                    break;
+
+                case 4:
+                    List<Lease> leases = leaseDao.getAllLeases();
+                    System.out.println("\nAll Leases:");
+                    for (Lease l : leases) {
+                        System.out.println(l);
+                    }
+                    break;
+
+                case 5:
+                    System.out.print("Enter Lease ID for payment: ");
+                    int leaseId = scanner.nextInt();
+                    System.out.print("Enter payment amount: ");
+                    double amount = scanner.nextDouble();
+                    scanner.nextLine(); // consume newline
+                    System.out.print("Enter payment method (Cash/Card/UPI): ");
+                    String method = scanner.nextLine();
+
+                    Payment payment = new Payment();
+                    payment.setLeaseId(leaseId);
+                    payment.setAmount(amount);
+                    payment.setPaymentDate(LocalDate.now());
+                    payment.setPaymentMethod(method);
+                    paymentDao.makePayment(payment);
+                    break;
+
+                case 6:
+                    List<Payment> payments = paymentDao.getAllPayments();
+                    System.out.println("\nAll Payments:");
+                    for (Payment p : payments) {
+                        System.out.println(p);
+                    }
+                    break;
+
+                case 0:
+                    System.out.println("Exiting system. Goodbye!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice! Try again.");
+            }
+        } while (choice != 0);
+
+        scanner.close();
+    }
+}
+

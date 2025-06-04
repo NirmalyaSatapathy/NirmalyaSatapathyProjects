@@ -1,0 +1,13 @@
+package com.java.asset.bal;
+
+import com.java.asset.dao.LoginDao;
+import com.java.asset.model.Login;
+
+public class LoginBal {
+	LoginDao loginDao;
+	
+public String adminLogin(Login login)
+{
+	return loginDao.adminLogin(login)
+}
+}

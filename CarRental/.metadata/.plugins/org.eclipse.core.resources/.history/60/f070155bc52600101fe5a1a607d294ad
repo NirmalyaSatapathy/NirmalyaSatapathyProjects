@@ -1,0 +1,56 @@
+package com.java.Carrental.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.java.Carrental.model.Car;
+import com.java.Carrental.util.ConnectionHelper;
+
+public class CarImp implements Cardao {
+
+	Connection con;
+	PreparedStatement psmt;
+	@Override
+	public void addCar(Car car) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		  String cmd = "insert into CAR (id,brand, model, isAvailable) VALUES (?,?, ?, ?)";
+		  con=ConnectionHelper.getConnection();
+		  psmt=con.prepareStatement(cmd);
+		  psmt.setInt(1, car.getId());
+          psmt.setString(2, car.getBrand());
+          psmt.setString(3, car.getModel();
+          psmt.setBoolean(4,car.isAvailability());
+          psmt.executeUpdate();
+	}
+
+	@Override
+	public void remove(int carId) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		 String cmd = "DELETE FROM cars WHERE id = ?";
+		 con=ConnectionHelper.getConnection();
+		 psmt=con.prepareStatement(cmd);
+		 psmt.setInt(1, carId);
+         psmt.executeUpdate();
+	}
+
+	@Override
+	public List<Car> showAvailableCars() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Car> showRentedCars() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Car findCarById(int carId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

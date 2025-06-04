@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.java.hp.model.Patient" table="Patient">
+    <id name="patientId" column="patientId">
+      <generator class="assigned"/>
+    </id>
+
+    <property name="patientName" column="patientName"/>
+    <property name="dateOfBirth" column="DateOfBirth"/>
+
+    <!-- Many-to-One to Doctor -->
+    <many-to-one name="doctor" column="doctorId" class="com.java.hp.model.Doctor" not-null="true"/>
+
+    <!-- One-to-Many with MedicalHistory -->
+    <list name="medicalHistory" cascade="all" inverse="true">
+      <key column="patientId"/>
+      <list-index column="list_index"/>
+      <one-to-many class="com.java.hp.model.MedicalHistory"/>
+    </list>
+  </class>
+  <query name="showPatientById">
+    from com.java.hp.model.Patient p where p.patientId = ?
+</query>
+  <query name="showPatientByDoctorId">
+    from com.java.hp.model.Patient p where p.doctor.doctorId = ?
+</query>
+</hibernate-mapping>

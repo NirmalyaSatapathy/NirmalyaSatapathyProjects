@@ -1,0 +1,21 @@
+package com.java.asset.controller;
+
+import com.java.asset.bal.AssetBal;
+import com.java.asset.bal.AssetManagerBal;
+import com.java.asset.model.AssetManager;
+
+public class AssetManagerController {
+private AssetManagerBal assetManagerBal;
+
+public AssetBal getAssetBal() {
+	return assetBal;
+}
+
+public void setAssetBal(AssetBal assetBal) {
+	this.assetBal = assetBal;
+}
+public String IssueAssetController(AssetManager assetManager)
+{
+	return 
+}
+}

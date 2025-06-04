@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+                                  http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+              version="2.0">
+
+    <!-- DAO Beans (used for logic and DB operations) -->
+    <managed-bean>
+        <managed-bean-name>doctorDao</managed-bean-name>
+        <managed-bean-class>com.java.hp.dao.DoctorDaoImpl</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>patientDao</managed-bean-name>
+        <managed-bean-class>com.java.hp.dao.PatientDaoImpl</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>medicalHistoryDao</managed-bean-name>
+        <managed-bean-class>com.java.hp.dao.MedicalHistoryDaoImpl</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <!-- Model Beans (used to hold form data) -->
+    <managed-bean>
+        <managed-bean-name>doctor</managed-bean-name>
+        <managed-bean-class>com.java.hp.model.Doctor</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>patient</managed-bean-name>
+        <managed-bean-class>com.java.hp.model.Patient</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>doctor</property-name>
+            <property-class>com.java.hp.model.Doctor</property-class>
+            <value>#{doctor}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>medicalHistory</managed-bean-name>
+        <managed-bean-class>com.java.hp.model.MedicalHistory</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+         <managed-property>
+            <property-name>patient</property-name>
+            <property-class>com.java.hp.model.Patient</property-class>
+            <value>#{patient}</value>
+        </managed-property>
+    </managed-bean>
+
+    <!-- Controller Bean -->
+    <managed-bean>
+        <managed-bean-name>controller</managed-bean-name>
+        <managed-bean-class>com.java.hp.controller.Controller</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        
+        <!-- Dependency Injection -->
+        <managed-property>
+            <property-name>doctorDao</property-name>
+            <property-class>com.java.hp.dao.DoctorDaoImpl</property-class>
+            <value>#{doctorDao}</value>
+        </managed-property>
+        
+        <managed-property>
+            <property-name>medicalHistoryDao</property-name>
+            <property-class>com.java.hp.dao.MedicalHistoryDaoImpl</property-class> <!-- Corrected this line -->
+            <value>#{medicalHistoryDao}</value>
+        </managed-property>
+        
+        <managed-property>
+            <property-name>patientDao</property-name>
+            <property-class>com.java.hp.dao.PatientDaoImpl</property-class>
+            <value>#{patientDao}</value>
+        </managed-property>
+    </managed-bean>
+
+</faces-config>

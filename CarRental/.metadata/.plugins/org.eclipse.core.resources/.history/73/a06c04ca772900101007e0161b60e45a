@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	 <h2>User Dashboard</h2>
+    <ul>
+        <li><a href="addCustomer.html">Register as New Customer</a></li>
+        <li><a href="createLease.html">Create Lease</a></li>
+        <li><a href="returnCar.html">Return Lease</a></li>
+        <li><a href="makePayment.html">Make Payment</a></li>
+        <li><a href="getLeaseCustomer.html">View My Leases</a></li>
+    </ul>
+</body>
+</html>

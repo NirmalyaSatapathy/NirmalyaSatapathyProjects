@@ -1,0 +1,8 @@
+package com.java.asset.bal;
+
+public class LoginBal {
+public String adminLogin()
+{
+	
+}
+}

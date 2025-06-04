@@ -1,0 +1,12 @@
+package com.java.asset.dao;
+
+import java.sql.SQLException;
+
+import com.java.asset.model.AssetManager;
+import com.java.asset.model.Employ;
+import com.java.asset.model.ReturnAsset;
+
+public interface AssetManagerDao {
+public String issueAsset(AssetManager assetManager) throws ClassNotFoundException, SQLException;
+public String returnAsset(ReturnAsset asset);
+}

@@ -1,0 +1,50 @@
+package com.java.asset.controller;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.java.asset.bal.AssetBal;
+import com.java.asset.bal.AssetManagerBal;
+import com.java.asset.model.AssetManager;
+import com.java.asset.model.ReturnAsset;
+
+public class AssetManagerController {
+private AssetManagerBal assetManagerBal;
+private List<AssetManager> assetHistoryList;
+private static final Logger log = Logger.getLogger("com.java.asset.Controller.AssetManagerController");
+
+public AssetManagerBal getAssetManagerBal() {
+	return assetManagerBal;
+}
+
+
+public void setAssetManagerBal(AssetManagerBal assetManagerBal) {
+	this.assetManagerBal = assetManagerBal;
+}
+
+
+public String issueAssetController(AssetManager assetManager) throws ClassNotFoundException, SQLException
+{
+	return assetManagerBal.issueAssetBal(assetManager);
+}
+public String returnAssetController(ReturnAsset asset) throws ClassNotFoundException, SQLException
+{
+	return assetManagerBal.returnAssetBal(asset);
+}
+public List<AssetManager> showPendingRequestsController() throws ClassNotFoundException, SQLException
+{
+	return assetManagerBal.showPendingRequestsBal();
+}
+public String approveAssetController(ReturnAsset asset) throws ClassNotFoundException, SQLException
+{
+	return assetManagerBal.approveAssetBal(asset);
+}
+public String showAssetHistoryController(ReturnAsset asset) throws Exception
+{
+	assetHistoryList= assetManagerBal.showAssetHistoryBal(asset);
+	return null;
+	
+}
+}
